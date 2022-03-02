@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <title> Linked In Information</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body bgcolor="cyan">
+    
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Linked In Employee infomration Scraper</span>
+</nav><br><br>
+<form action="scrape" method="POST" >
+  {% csrf_token %}
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="formGroupExampleInput">LinkedIn URL of the company (Mandatory Field)</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" name="url" placeholder="eg:https://www.linkedin.com/company/xyz">
+    </div><br><br>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="formGroupExampleInput2">Location of Employee (Optional Field)</label>
+      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter the city">
+    </div><br><br>
+    <div class="right">
+        <button  style="margin-right" type="submit" class="btn btn-primary btn-md">Click to Scrape the link</button>
+    </div>
+    {% if name is 'ok' %}
+      window.alert("Scraping is completed")
+    {% endif %}
+</form>
+
+
+
+</body>
+</html>
