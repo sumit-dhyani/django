@@ -58,20 +58,40 @@ class scrapping:
         # i am limiting it to 5 for now as due to many tests my Ip was blocked by linked in once
         # also it has become very slow too
         for i in range(1,6):
+            #Check whether the conditions in the DOM are established every 0.5, usually surrounded by try catch
+            
+            self.wait.until(EC.presence_of_element_located((By.XPATH,"//li[contains(@class,'reusable-search__result-container')]")))
             blocks=self.driver.find_elements(By.XPATH,"//li[contains(@class,'reusable-search__result-container')]")
             for b in blocks:
                 try:
-                    n=b.find_element(By.XPATH,".//span[contains(@dir,'ltr')]/span[contains(@aria-hidden,'true')]").text
+                    self.wait.until(EC.presence_of_element_located((By.XPATH,".//a[contains(@class,'app-aware-link')]/span[1]/span[1]")))
+                    n=b.find_element(By.XPATH,".//a[contains(@class,'app-aware-link')]/span[1]/span[1]").text
                     name.append(n)
                 except:
-                    n="Linked In Member. Profile not visible"
-                    name.append(n)
-                s=b.find_element(By.XPATH,".//div[contains(@class,'t-black t-normal')]").text
-                bio.append(s)
-                c=b.find_element(By.XPATH,".//div[contains(@class,'t-14 t-normal')]").text
-                city.append(c)
-                u=b.find_element(By.XPATH,".//span[contains(@class,'t-16')]/a").get_attribute('href')
-                url.append(u)
+                    name.append("Linked In Member. Profile not visible")
+                try:
+                    self.wait.until(EC.presence_of_element_located((By.XPATH,".//div[contains(@class,'t-black t-normal')]")))
+                    s=b.find_element(By.XPATH,".//div[contains(@class,'t-black t-normal')]").text
+                    bio.append(s)
+                except:
+                    print("unable to find the element as no longer available skipping for now")
+                    bio.append("")
+                try:
+                    self.wait.until(EC.presence_of_element_located((By.XPATH,".//div[contains(@class,'t-14 t-normal')]")))
+                    c=b.find_element(By.XPATH,".//div[contains(@class,'t-14 t-normal')]").text
+                    city.append(c)
+                except:
+                    print("unable to find the element skipping for now")
+                    city.append("")
+                try:
+                    self.wait.until(EC.presence_of_element_located((By.XPATH,".//span[contains(@class,'t-16')]/a")))
+                    u=b.find_element(By.XPATH,".//span[contains(@class,'t-16')]/a").get_attribute('href')
+                    url.append(u)
+                except:
+                    print("unable to find the element skipping for now")
+                    u="https://www.linkedin.com/search/results/people/headless?currentCompany=%5B10369067%5D&origin=COMPANY_PAGE_CANNED_SEARCH"
+                    url.append(u)
+
                 if u=="https://www.linkedin.com/search/results/people/headless?currentCompany=%5B10369067%5D&origin=COMPANY_PAGE_CANNED_SEARCH" or u=="https://www.linkedin.com/search/results/people/headless?currentCompany=%5B10369067%5D&origin=OTHER":
                     print("profile not accessible")
                 else:
