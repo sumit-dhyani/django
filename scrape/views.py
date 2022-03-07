@@ -13,4 +13,4 @@ def scrape(request):
     
 
     
-    return HttpResponse('<h1>Scraping is completed</h1>')
+    return HttpResponse('<h2>Scraping is completed</h2>')
