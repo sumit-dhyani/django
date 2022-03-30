@@ -31,7 +31,7 @@ class scrapping:
         try:
             self.driver.find_element(By.XPATH,"//a[contains(@class,'main__sign-in-link')]").click()
             self.driver.find_element(By.XPATH,"//input[contains(@id,'username')]").send_keys(7983138711)
-            self.driver.find_element(By.XPATH,"//input[contains(@id,'password')]").send_keys('Korebi@321')
+            self.driver.find_element(By.XPATH,"//input[contains(@id,'password')]").send_keys('*****')
             self.driver.find_element(By.XPATH,"//button[contains(@class,'btn__primary--large from__button--floating')]").click()
         except:
 
